@@ -6,6 +6,8 @@ Jekyll Image Tag is a full featured liquid tag for images in the [Jekyll](http:/
 
 For responsive images in Jekyll, take a look at [Jekyll Picture Tag](https://github.com/robwierzbowski/jekyll-picture-tag).
 
+This fork contains a small modification for image captions.
+
 ## Installation
 
 Jekyll Image Tag requires [Jekyll](http://jekyllrb.com) `>=1.0`, [Minimagick](https://github.com/minimagick/minimagick) `>=3.6`, and [Imagemagick](http://www.imagemagick.org/script/index.php).
@@ -46,6 +48,12 @@ The base image. Can be a jpeg, png, or gif.
 #### attribute="value"
 
 Optionally specify any number of HTML attributes. These will be merged with any [attributes you've set in a preset](#attr). An attribute set in a tag will override the same attribute set in a preset.
+
+#### special attribute "title"
+
+As a modification to the original source, the "title" attribute will create a special HTML output if you set it. It will generate a `<div class="imgbox">` that is wrapped around the `<img>` tag and will embed the title as text into the mentioned div. By this, you can place an image caption directly underneath the image.
+
+If you set the "title" attribute to "_alt" it will copy the value from the "alt" attribute.
 
 ### Configuration
 

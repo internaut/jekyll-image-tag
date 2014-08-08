@@ -75,6 +75,13 @@ module Jekyll
       if preset && preset['attr']
         html_attr = preset['attr'].merge(html_attr)
       end
+      
+      # check for 'title' attribute
+      if html_attr['title'] == "_alt"
+        html_attr['title'] = html_attr['alt']
+      end
+      
+      img_title = html_attr['title']
 
       html_attr_string = html_attr.inject('') { |string, attrs|
         if attrs[1]
@@ -94,7 +101,13 @@ module Jekyll
       end
 
       # Return the markup!
-      "<img src=\"#{generated_src}\" #{html_attr_string}>"
+      gen_markup = "<img src=\"#{generated_src}\" #{html_attr_string}>"
+      
+      if img_title  # use special markup if we have a title attribute
+        gen_markup = "<div class=\"imgbox\"><div>#{gen_markup} #{img_title}</div></div>"
+      end
+      
+      return gen_markup
     end
 
     def generate_image(instance, site_source, site_dest, image_source, image_dest)
